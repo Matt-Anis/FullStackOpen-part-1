@@ -1,22 +1,33 @@
 import { useState } from "react";
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
-const StatisticLine = ({ text, value, suffix }) => <p>{text} {value} {suffix}</p>
+const StatisticRow = ({ text, value, suffix }) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value} {suffix}</td>
+    </tr>
+  )
+}
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad;
   const average = all === 0 ? 0 : (good - bad) / all;
   const positive = all === 0 ? 0 : (good / all) * 100;
 
-  if (all === 0) return <StatisticLine text={'No feedback given'} />
+  if (all === 0) return <p>No feedback given</p>
   return (
     <>
-      <StatisticLine text={'good'} value={good} />
-      <StatisticLine text={'neutral'} value={neutral} />
-      <StatisticLine text={'bad'} value={bad} />
-      <StatisticLine text={'all'} value={all} />
-      <StatisticLine text={'average'} value={average} />
-      <StatisticLine text={'positive'} value={positive} suffix={'%'} />
+    <table>
+      <tbody>
+      <StatisticRow text={'good'} value={good} />
+      <StatisticRow text={'neutral'} value={neutral} />
+      <StatisticRow text={'bad'} value={bad} />
+      <StatisticRow text={'all'} value={all} />
+      <StatisticRow text={'average'} value={average} />
+      <StatisticRow text={'positive'} value={positive} suffix={'%'} />
+      </tbody>
+    </table>
     </>
   );
 };
@@ -37,5 +48,5 @@ const App = () => {
     </div>
   );
 };
-0;
+
 export default App;
